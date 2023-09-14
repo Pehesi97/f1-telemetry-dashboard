@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.3](https://github.com/Pehesi97/f1-telemetry-dashboard/compare/v1.0.2...v1.0.3) (2023-09-14)
+
+
+### Bug Fixes
+
+* workflow ([#8](https://github.com/Pehesi97/f1-telemetry-dashboard/issues/8)) ([be7fca4](https://github.com/Pehesi97/f1-telemetry-dashboard/commit/be7fca40da95c776201980576c30bcbcaf3bbf95))
+
 ## [1.0.2](https://github.com/Pehesi97/f1-telemetry-dashboard/compare/v1.0.1...v1.0.2) (2023-09-14)
 
 
