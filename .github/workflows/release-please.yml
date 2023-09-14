@@ -1,0 +1,17 @@
+name: release-please
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  release-please:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: google-github-actions/release-please-action@v3
+        with:
+          release-type: simple
+          package-name: f1-telemetry-dashboard
+          bump-minor-pre-major: true
+          token: ${{ secrets.GITHUB_TOKEN }}

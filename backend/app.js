@@ -23,11 +23,10 @@ client.start();
 client.on(PACKETS.lapData, (data) => {
   io.emit("lapData", {
     position: data.m_lapData[data.m_header.m_playerCarIndex].m_carPosition,
-    lastLapTime: data.m_lapData[data.m_header.m_playerCarIndex].m_lastLapTime,
-    bestLapTime: data.m_lapData[data.m_header.m_playerCarIndex].m_bestLapTime,
-    currentLapTime: data.m_lapData[data.m_header.m_playerCarIndex].m_currentLapTime,
-    sector1Time: data.m_lapData[data.m_header.m_playerCarIndex].m_sector1Time,
-    sector2Time: data.m_lapData[data.m_header.m_playerCarIndex].m_sector2Time,
+    lastLapTime: data.m_lapData[data.m_header.m_playerCarIndex].m_lastLapTimeInMS,
+    currentLapTime: data.m_lapData[data.m_header.m_playerCarIndex].m_currentLapTimeInMS,
+    sector1Time: data.m_lapData[data.m_header.m_playerCarIndex].m_sector1TimeMinutes,
+    sector2Time: data.m_lapData[data.m_header.m_playerCarIndex].m_sector2TimeMinutes,
     currentLapNum: data.m_lapData[data.m_header.m_playerCarIndex].m_currentLapNum
   });
 })
