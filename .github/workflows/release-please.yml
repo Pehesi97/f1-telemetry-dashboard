@@ -18,19 +18,17 @@ jobs:
           token: ${{ secrets.PEDRO_GITHUB_TOKEN }}
 
       - name: Get PR output
-        if: fromJSON(steps.rp.outputs.releases_created)
+        if: steps.rp.outputs.releases_created
         run: |
           echo ${{ steps.rp.outputs.sha }}
 
       - uses: octokit/request-action@v2.1.9
-        if: fromJSON(steps.rp.outputs.releases_created)
+        if: steps.rp.outputs.releases_created
         id: get_rp_commit
         with:
-          route: GET /repos/{owner}/{repo}/commits/${{ steps.rp.outputs.sha }}
-          owner: nearform
-          repo: initium-cli
+          route: GET /repos/pehesi97/f1-telemetry-dashboard/commits/${{ steps.rp.outputs.sha }}
         env:
           GITHUB_TOKEN: ${{ secrets.PEDRO_GITHUB_TOKEN }}
 
-      - if: fromJSON(steps.rp.outputs.releases_created)
+      - if: steps.rp.outputs.releases_created
         run: "echo commit: '${{ steps.get_rp_commit.outputs.data }}'"
