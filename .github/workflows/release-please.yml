@@ -17,6 +17,11 @@ jobs:
           bump-minor-pre-major: true
           token: ${{ secrets.PEDRO_GITHUB_TOKEN }}
 
+      - name: Get PRs
+        if: steps.rp.outputs.releases_created
+        run: |
+          echo ${{ steps.rp.outputs.prs }} ${{ steps.rp.outputs.pr }}
+
       - name: Get PR output
         if: steps.rp.outputs.releases_created
         run: |
