@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.4](https://github.com/Pehesi97/f1-telemetry-dashboard/compare/v1.0.3...v1.0.4) (2023-09-14)
+
+
+### Bug Fixes
+
+* testing get PRs ([#10](https://github.com/Pehesi97/f1-telemetry-dashboard/issues/10)) ([8e2b11b](https://github.com/Pehesi97/f1-telemetry-dashboard/commit/8e2b11bad9952123ece9bdab8f69879578cbed0f))
+
 ## [1.0.3](https://github.com/Pehesi97/f1-telemetry-dashboard/compare/v1.0.2...v1.0.3) (2023-09-14)
 
 
