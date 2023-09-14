@@ -10,8 +10,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: google-github-actions/release-please-action@v3
+        id: rp
         with:
           release-type: simple
           package-name: f1-telemetry-dashboard
           bump-minor-pre-major: true
           token: ${{ secrets.PEDRO_GITHUB_TOKEN }}
+
+      - name: Get PR output
+        run: |
+          echo ${{ steps.rp.outputs.pr }}
