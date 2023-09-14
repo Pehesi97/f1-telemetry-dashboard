@@ -19,4 +19,4 @@ jobs:
 
       - name: Get PR output
         run: |
-          echo ${{ steps.rp.outputs.pr }}
+          echo ${{join(steps.rp.outputs.*, '\n')}}
