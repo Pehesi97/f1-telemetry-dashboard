@@ -1,8 +1,11 @@
 <script setup lang="ts">
 import { RouterView } from 'vue-router'
+import Menu from './components/Menu.vue'
+import type AboutViewVue from './views/AboutView.vue';
 </script>
 
 <template>
+  <Menu></Menu>
   <RouterView />
 </template>
 

@@ -1,13 +1,19 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from '../views/HomeView.vue'
+import LiveTelemetryView from '../views/LiveTelemetryView.vue'
+import ViewTelemetryView from '../views/ViewTelemetryView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
-      path: '/',
-      name: 'home',
-      component: HomeView
+      path: '/live',
+      name: 'live',
+      component: LiveTelemetryView
+    },
+    {
+      path: '/view',
+      name: 'view',
+      component: ViewTelemetryView
     },
     {
       path: '/about',
