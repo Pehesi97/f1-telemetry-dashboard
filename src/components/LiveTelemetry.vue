@@ -62,10 +62,12 @@ export default {
       const m = this.currentLapTime / 60000
       return `${m.toLocaleString('en-US', {
         minimumIntegerDigits: 2,
-        useGrouping: false
+        useGrouping: false,
+        maximumFractionDigits: 0
       })}:${s.toLocaleString('en-US', {
         minimumIntegerDigits: 2,
-        useGrouping: false
+        useGrouping: false,
+        maximumFractionDigits: 0
       })}.${ms.toLocaleString('en-US', { minimumIntegerDigits: 3, useGrouping: false })}`
     }
   },
