@@ -1,19 +1,31 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import LiveTelemetryView from '../views/LiveTelemetryView.vue'
-import ViewTelemetryView from '../views/ViewTelemetryView.vue'
+// import LiveTelemetryView from '../views/LiveTelemetryView.vue'
+// import ViewTelemetryView from '../views/ViewTelemetryView.vue'
+import RaceTelemetryView from '../views/RaceTelemetryView.vue'
+import SessionDataView from '../views/SessionDataView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
+    // {
+    //   path: '/live',
+    //   name: 'live',
+    //   component: LiveTelemetryView
+    // },
+    // {
+    //   path: '/view',
+    //   name: 'view',
+    //   component: ViewTelemetryView
+    // },
     {
-      path: '/live',
-      name: 'live',
-      component: LiveTelemetryView
+      path: '/race',
+      name: 'race',
+      component: RaceTelemetryView
     },
     {
-      path: '/view',
-      name: 'view',
-      component: ViewTelemetryView
+      path: '/session',
+      name: 'session',
+      component: SessionDataView
     },
     {
       path: '/about',
