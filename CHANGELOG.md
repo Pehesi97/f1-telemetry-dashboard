@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.1.0](https://github.com/Pehesi97/f1-telemetry-dashboard/compare/v1.0.4...v1.1.0) (2023-12-11)
+
+
+### Features
+
+* more session data ([d2c1977](https://github.com/Pehesi97/f1-telemetry-dashboard/commit/d2c197709462ea6a2e2d6ca6b89b0b72a3eee726))
+* random stuff ([fce28b9](https://github.com/Pehesi97/f1-telemetry-dashboard/commit/fce28b9df0cbeff60f08977257746a79a4854dee))
+
+
+### Bug Fixes
+
+* fraction digits ([9a09161](https://github.com/Pehesi97/f1-telemetry-dashboard/commit/9a09161572fbe8f47654c7860ab525cee8a65be9))
+
 ## [1.0.4](https://github.com/Pehesi97/f1-telemetry-dashboard/compare/v1.0.3...v1.0.4) (2023-09-14)
 
 
