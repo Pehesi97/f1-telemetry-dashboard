@@ -6,7 +6,7 @@
       </ul>
     </nav>
     <div class="driver-telemetry" v-if="session">
-      AI difficulty: {{ session.aiDifficulty }} 
+      AI difficulty: {{ session.aiDifficulty }}
       Track: {{ session.track }}
       Weather: {{ session.weather }}
       Players: {{ session.players.join(', ') }}
@@ -47,13 +47,17 @@ export default {
       autoConnect: true
     })
     this.socket.on('sessionData', (data) => {
-      this.session.aiDifficulty = data.aiDifficulty;
-      this.session.track = data.track;
-      this.session.weather = data.weather;
+      this.session.$patch({
+        aiDifficulty: data.aiDifficulty,
+        track: data.track,
+        weather: data.weather,
+      });
     })
     this.socket.on('lobbyInfo', (data) => {
-      this.session.players = data.players;
-      this.session.playerNumbers = data.playerNumbers;
+      this.session.$patch({
+        players: data.players,
+        playerNumbers: data.playerNumbers,
+      });
     })
     this.socket.connect()
   },

@@ -35,14 +35,41 @@ client.on(PACKETS.carTelemetry, (data) => {
         brake: data.m_carTelemetryData[data.m_header.m_playerCarIndex].m_brake,
         gear: data.m_carTelemetryData[data.m_header.m_playerCarIndex].m_gear,
         speed: data.m_carTelemetryData[data.m_header.m_playerCarIndex].m_speed,
-        frame: data.m_header.m_frameIdentifier
+        frame: data.m_header.m_frameIdentifier,
+    });
+});
+client.on(PACKETS.carStatus, (data) => {
+    let tyreWearData = [];
+    data.m_carStatusData.forEach((car) => {
+        var _a, _b, _c, _d, _e, _f, _g, _h;
+        tyreWearData.push({
+            a: (_b = (_a = car.m_tyresWear) === null || _a === void 0 ? void 0 : _a[0]) !== null && _b !== void 0 ? _b : 0,
+            b: (_d = (_c = car.m_tyresWear) === null || _c === void 0 ? void 0 : _c[1]) !== null && _d !== void 0 ? _d : 0,
+            c: (_f = (_e = car.m_tyresWear) === null || _e === void 0 ? void 0 : _e[2]) !== null && _f !== void 0 ? _f : 0,
+            d: (_h = (_g = car.m_tyresWear) === null || _g === void 0 ? void 0 : _g[3]) !== null && _h !== void 0 ? _h : 0,
+        });
+    });
+    io.emit('tyreWearData', {
+        data: tyreWearData
+    });
+});
+client.on(PACKETS.participants, (data) => {
+    io.emit('drivers', {
+        drivers: data.m_participants,
+        driverCount: data.m_numActiveCars
     });
 });
 client.on(PACKETS.session, (data) => {
     io.emit("sessionData", {
-        aiDifficulty: data.m_aiDifficulty
+        aiDifficulty: data.m_aiDifficulty,
+        track: f1_telemetry_client_1.constants.TRACKS[data.m_trackId].name,
+        weather: data.m_weather,
     });
 });
 client.on(PACKETS.lobbyInfo, (data) => {
+    io.emit("lobbyInfo", {
+        players: data.m_lobbyPlayers,
+        playerNumbers: data.m_numPlayers
+    });
 });
 exports.default = server;

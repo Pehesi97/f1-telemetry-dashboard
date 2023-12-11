@@ -1,5 +1,5 @@
 import { F1TelemetryClient, constants } from '@racehub-io/f1-telemetry-client';
-import { PacketLapData, PacketCarTelemetryData, PacketSessionData, PacketSessionHistoryData, PacketLobbyInfoData } from '@racehub-io/f1-telemetry-client/build/main/parsers/packets/types';
+import { PacketLapData, PacketCarTelemetryData, PacketSessionData, PacketSessionHistoryData, PacketLobbyInfoData, PacketCarStatusData, PacketParticipantsData } from '@racehub-io/f1-telemetry-client/build/main/parsers/packets/types';
 
 const { PACKETS } = constants;
 
@@ -41,15 +41,37 @@ client.on(PACKETS.carTelemetry, (data: PacketCarTelemetryData) => {
     brake: data.m_carTelemetryData[data.m_header.m_playerCarIndex].m_brake,
     gear: data.m_carTelemetryData[data.m_header.m_playerCarIndex].m_gear,
     speed: data.m_carTelemetryData[data.m_header.m_playerCarIndex].m_speed,
-    frame: data.m_header.m_frameIdentifier
+    frame: data.m_header.m_frameIdentifier,
   });
 });
+
+client.on(PACKETS.carStatus, (data: PacketCarStatusData) => {
+  let tyreWearData = [] as any[]
+  data.m_carStatusData.forEach((car) => {
+    tyreWearData.push({
+      a: car.m_tyresWear?.[0] ?? 0,
+      b: car.m_tyresWear?.[1] ?? 0,
+      c: car.m_tyresWear?.[2] ?? 0,
+      d: car.m_tyresWear?.[3] ?? 0,
+    })
+  });
+  io.emit('tyreWearData', {
+    data: tyreWearData
+  })
+})
+
+client.on(PACKETS.participants, (data: PacketParticipantsData) => {
+  io.emit('drivers', {
+    drivers: data.m_participants,
+    driverCount: data.m_numActiveCars
+  })
+})
 
 client.on(PACKETS.session, (data: PacketSessionData) => {
   io.emit("sessionData", {
     aiDifficulty: data.m_aiDifficulty,
     track: constants.TRACKS[data.m_trackId].name,
-    weather: data.m_weather
+    weather: data.m_weather,
   });
 });
 

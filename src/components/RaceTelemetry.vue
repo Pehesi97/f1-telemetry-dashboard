@@ -2,7 +2,7 @@
   <div class="race-telemetry">
     <nav>
       <ul>
-        <li v-for="(driver, index) in drivers" :key="driver.id">{{ driverName }}</li>
+        <li v-for="(driver, index) in drivers" :key="driver.id">{{ driver.name }}</li>
       </ul>
     </nav>
     <div class="driver-telemetry">
@@ -21,6 +21,7 @@
 import { io } from 'socket.io-client'
 
 import Chart from '@/components/Chart.vue'
+import { useSessionStore } from '@/stores/session'
 
 export default {
   name: 'RaceTelemetry',
@@ -31,18 +32,45 @@ export default {
     width: '1000px',
     height: '360px',
     socket: {},
-    drivers: []
+    drivers: [] as any[]
+
   }),
+  setup() {
+    const session = useSessionStore()
+    return { session }
+  },
   mounted() {
     this.socket = io('localhost:3000', {
       autoConnect: true
     })
     this.socket.connect()
+    this.socket.on('sessionData', (data) => {
+      this.session.$patch({
+        aiDifficulty: data.aiDifficulty,
+        track: data.track,
+        weather: data.weather,
+      });
+    })
+    this.socket.on('drivers', data => {
+      this.drivers = data.drivers
+    })
+    this.socket.on('lobbyInfo', (data) => {
+      this.session.$patch({
+        players: data.players,
+        playerNumbers: data.playerNumbers,
+      });
+    })
+    this.socket.on('tyreWearData', (data) => {
+      data.forEach((tyreWearData, index) => {
+        this.drivers[index].tyreWear = tyreWearData
+      })
+    })
+    // this.getDrivers()
   },
   methods: {
-    getDrivers() {
-
-    }
+    // getDrivers() {
+    //   this.drivers = this.session.players
+    // }
     // uploadFileAndPlotData(event) {
     //   const file = event.target.files[0]
     //   const reader = new FileReader()
